@@ -4,6 +4,7 @@
 
 // go command is not available on android
 
+//go:build !android
 // +build !android
 
 package main
@@ -117,9 +118,11 @@ func run(name string, arg ...string) error {
 // runInDir runs a single command in directory dir and returns an error if
 // it does not succeed.
 func runInDir(dir, name string, arg ...string) error {
+	fmt.Println(name, arg)
 	cmd := exec.Command(name, arg...)
 	cmd.Dir = dir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
+
